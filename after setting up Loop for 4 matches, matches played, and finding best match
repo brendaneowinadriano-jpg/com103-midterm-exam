@@ -1,0 +1,62 @@
+# LOOP FOR 4 MATCHES
+for i in range(1, 5):
+    print(f"--- MATCH {i} ---")
+    hero_num = int(input("Hero number (0 to skip): "))
+
+    if hero_num == 0:
+        print()
+        continue
+
+    if 1 <= hero_num <= 5:
+        kills = int(input("Kills: "))
+        deaths = int(input("Deaths: "))
+        assists = int(input("Assists: "))
+        result = input("Result (W/L): ").upper()
+
+        # FIX DEATHS = 0
+        if deaths == 0:
+            deaths = 1
+
+        # COMPUTE KDA
+        kda = (kills + assists) / deaths
+
+        # PERFORMANCE TAG
+        if kda >= 5 and result == "W":
+            tag = "DOMINATION!"
+        elif kda >= 5 and result == "L":
+            tag = "Carried Hard"
+        elif kda < 5 and result == "W":
+            tag = "Team Effort"
+        else:
+            tag = "Better Luck Next Game"
+
+        # COUNT WINS/LOSSES
+        if result == "W":
+            wins += 1
+        else:
+            losses += 1
+
+        # GET HERO NAME
+        hero_name = heroes[hero_num - 1][1]
+
+        # STORE DATA
+        match_logs.append({
+            "hero": hero_name,
+            "kda": kda,
+            "result": result,
+            "tag": tag
+        })
+
+    print()
+
+# Matches Played
+matches_played = len(match_logs)
+
+if matches_played > 0:
+    win_rate = int((wins / matches_played) * 100)
+else:
+    win_rate = 0
+
+# BEST MATCH
+best_match = None
+highest_kda = 0

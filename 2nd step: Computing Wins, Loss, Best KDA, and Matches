@@ -1,0 +1,5 @@
+#Computing Wins, Losses, Best KDA, Best Matc
+wins = 0
+losses = 0
+best_kda = 0
+best_match = None

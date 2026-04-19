@@ -1,0 +1,38 @@
+print("=============================================")
+print(f"     {ign} -- MATCH LOG ({rank})")
+print("=============================================")
+
+for log in match_log:
+    log_num, hero, kda, result, tag = log
+
+    # Count wins/losses
+    if result == "Win":
+        wins += 1
+        result_display = "WIN "
+    else:
+        losses += 1
+        result_display = "LOSS"
+
+    # Track best match
+    if kda > best_kda:
+        best_kda = kda
+        best_match = log
+
+    
+    print(f"[{log_num}] {hero:<11} | KDA: {kda:.2f} | {result_display} | {tag}")
+
+# Summary
+total_matches = len(match_log)
+win_rate = int((wins / total_matches) * 100)
+
+print("---------------------------------------------")
+print(f"Matches Played : {total_matches}")
+print(f"Wins : {wins}  |  Losses : {losses}")
+print(f"Win Rate       : {win_rate}%")
+
+# Best match display
+if best_match:
+    log_num, hero, kda, _, _ = best_match
+    print(f"Best Match     : [{log_num}] {hero}  (KDA: {kda:.2f})")
+
+print("=============================================")
